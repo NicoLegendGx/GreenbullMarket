@@ -52,9 +52,11 @@ const Footer = () => {
           <div className="col s12 m6 l2">
             <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>Contáctanos</h6>
             <p>📞 3212760086</p>
-            <p>📞 321980212</p>
-            <p>📧 servicio@greenbull.com</p>
-            <p>📍 Neiva, Colombia</p>
+            <p>📞 3219810212</p>
+            <p>📞 3187135656</p>
+            <p>📞 3154453060</p>
+            <p>📧tonto@gmail.com</p>
+            <p>📍 Neiva, Huila</p>
           </div>
 
           
@@ -65,6 +67,7 @@ const Footer = () => {
               "Trabaja con nosotros",
               "Preguntas frecuentes",
               "Noticias y Actividades",
+              "Malparidos",
             ].map((link, i) => (
               <a
                 key={i}
@@ -90,6 +93,7 @@ const Footer = () => {
               "Términos y condiciones",
               "Responsabilidad corporativa",
               "Tratamiento de la información",
+              "Politica AntiTravestis",
             ].map((link, i) => (
               <a
                 key={i}

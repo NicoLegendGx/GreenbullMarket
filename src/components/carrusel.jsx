@@ -64,7 +64,7 @@ return (
 
     <div className="carousel-item white-text" href="#four!">
         <img
-        src="CanastaFamilar.jpg"
+        src="NOfertaNevera.jpg"
         alt="Canasta Familiar"
         className="responsive-img z-depth-3"
         style={{

@@ -38,56 +38,69 @@ function App() {
               <Carrusel />
 
               <section className="section lime lighten-5">
-                <div className="container center-align">
-                  <h4 className="black-text text-darken-3">
+                <div className="container">
+                  <h4 className="center black-text text-darken-3">
                     <b>Categorías</b>
                   </h4>
 
                   <div className="row">
                     {categorias.map((cat, i) => (
-                      <div className="col s6 m3" key={i}>
-                        <Link
-                          to={cat.link || "#!"}
-                          style={{ textDecoration: "none" }}
-                        >
+                      <div className="col s12 m6 l3" key={i}>
+                        <Link to={cat.link || "#!"} style={{ textDecoration: "none" }}>
                           <div
                             className="card hoverable z-depth-2"
                             style={{
-                              borderRadius: "50%",
-                              backgroundColor: "#09aa44",
-                              width: "100px",
-                              height: "100px",
-                              margin: "20px auto",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              border: "4px solid black",
+                              backgroundColor: "#43a047",
+                              borderRadius: "12px",
                               transition: "all 0.3s ease",
+                              cursor: "pointer",
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.borderColor = "#ffcc00";
-                              e.currentTarget.firstChild.style.color = "#ffcc00";
-                              e.currentTarget.style.transform = "scale(1.1)";
+                              e.currentTarget.style.backgroundColor = "#66bb6a"; 
+                              e.currentTarget.querySelector("i").style.color = "#ffeb3b"; 
                             }}
                             onMouseLeave={(e) => {
-                              e.currentTarget.style.borderColor = "black";
-                              e.currentTarget.firstChild.style.color = "black";
-                              e.currentTarget.style.transform = "scale(1)";
+                              e.currentTarget.style.backgroundColor = "#43a047";
+                              e.currentTarget.querySelector("i").style.color = "black";
                             }}
                           >
-                            <i
-                              className="material-icons black-text"
-                              style={{ fontSize: "40px" }}
+                            <div className="card-content center white-text">
+                              <i
+                                className="material-icons"
+                                style={{
+                                  fontSize: "48px",
+                                  color: "black",
+                                  transition: "color 0.3s ease",
+                                }}
+                              >
+                                {cat.icon}
+                              </i>
+                              <span
+                                className="card-title"
+                                style={{
+                                  fontWeight: "bold",
+                                  fontSize: "1.2rem",
+                                  marginTop: "10px",
+                                  color: "black",
+                                }}
+                              >
+                                {cat.text}
+                              </span>
+                            </div>
+                            <div
+                              className="card-action center"
+                              style={{
+                                backgroundColor: "rgba(255,255,255,0.2)",
+                              }}
                             >
-                              {cat.icon}
-                            </i>
+                              <span
+                                className="black-text"
+                                style={{ fontWeight: "bold" }}
+                              >
+                                Ver productos
+                              </span>
+                            </div>
                           </div>
-                          <p
-                            className="black-text"
-                            style={{ fontWeight: "bold" }}
-                          >
-                            {cat.text}
-                          </p>
                         </Link>
                       </div>
                     ))}
@@ -97,15 +110,21 @@ function App() {
 
               <section className="section beige lighten-4 center">
                 <div className="container">
-                  <h4 className="green-text text-darken-4">
-                    Ofertas Especiales
-                  </h4>
+                  <h4 className="green-text text-darken-4">Ofertas Especiales</h4>
                   <div className="row">
                     {[
                       { img: "OfertaAlcohol.jpg" },
                       { img: "CanastaFamilar.jpg" },
                       { img: "OfertaCarneRefri.jpg" },
                       { img: "OfertaYogurt.jpg" },
+                      { img: "NCanastaAseo.jpg" },
+                      { img: "NCanastaKitCocina.jpg" },
+                      { img: "NCanastaSupermercado.jpg" },
+                      { img: "NOfertaFruta.jpg" },
+                      { img: "NOfertaLimpieza.jpg" },
+                      { img: "NOfertaVerdura.jpg" },
+                      { img: "NOfertaCelular.jpg" },
+                      { img: "NOfertaCereal.jpg" },
                     ].map((p, i) => (
                       <div className="col s12 m6 l3" key={i}>
                         <div
@@ -164,24 +183,22 @@ function App() {
 
                   <div className="row">
                     {[
-                      { nombre: "Manzanas", precio: "$4.500", img: "Manzanas.png" },
-                      { nombre: "Leche", precio: "$3.200", img: "Leche.png" },
-                      { nombre: "Arroz", precio: "$2.800", img: "Arroz.png" },
-                      { nombre: "Carne", precio: "$12.000", img: "Carne.png" },
-                      { nombre: "Huevos", precio: "$10.500", img: "Huevo.png" },
-                      { nombre: "Pan", precio: "$2.000", img: "Pan.png" },
-                      { nombre: "Queso", precio: "$7.200", img: "Queso.png" },
-                      { nombre: "Cerveza", precio: "$2.800", img: "Cerveza.png" },
+                      { nombre: "Manzanas X 1kg", precio: "$14.500", img: "Manzanas.png" },
+                      { nombre: "Leche Alqueria X 1lt", precio: "$5.740", img: "Leche Alqueria.jpg" },
+                      { nombre: "Arroz Wahaj X 5kg", precio: "$2.800", img: "Arroz.png" },
+                      { nombre: "Carne Molida X kg", precio: "$22.000", img: "Carne Molida.png" },
+                      { nombre: "Canasta De Huevos", precio: "$12.500", img: "Canasta de Huevos.jpg" },
+                      { nombre: "Pan Bimbo ", precio: "$2.000", img: "Pan.png" },
+                      { nombre: "Queso Asadero x kg", precio: "$7.200", img: "Queso.png" },
+                      { nombre: "Cerveza Heineken", precio: "$2.800", img: "Cerveza.png" },
+                      { nombre: "Papel Higienico", precio: "$6.800", img: "papel higienico.jpg" },
+                      { nombre: "Salsa De Tomate Fruco X 400gr ", precio: "$8.800", img: "salsa de tomate fruco.jpg" },
+                      { nombre: "Aceite La Favorita X 3lt", precio: "$4.500", img: "Aceite.jpg" },
+                      { nombre: "Blanqueador Full Fresh X 3785ml", precio: "$4.500", img: "Blanqueador.jpg" },
                     ].map((p, i) => (
                       <div className="col s12 m6 l3" key={i}>
-                        <div
-                          className="card z-depth-1 hoverable"
-                          style={{ borderRadius: "12px" }}
-                        >
-                          <div
-                            className="card-image"
-                            style={{ height: "180px", overflow: "hidden" }}
-                          >
+                        <div className="card z-depth-1 hoverable" style={{ borderRadius: "12px" }}>
+                          <div className="card-image" style={{ height: "180px", overflow: "hidden" }}>
                             <img
                               src={p.img}
                               alt={p.nombre}
@@ -200,9 +217,7 @@ function App() {
                             >
                               {p.nombre}
                             </span>
-                            <p className="green-text text-darken-2">
-                              {p.precio}
-                            </p>
+                            <p className="green-text text-darken-2">{p.precio}</p>
                           </div>
                           <div className="card-action">
                             <a
@@ -214,9 +229,7 @@ function App() {
                                 padding: "0 10px",
                               }}
                             >
-                              <i className="material-icons left">
-                                add_shopping_cart
-                              </i>
+                              <i className="material-icons left">add_shopping_cart</i>
                               Agregar
                             </a>
                           </div>

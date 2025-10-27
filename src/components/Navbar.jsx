@@ -5,7 +5,6 @@ import { FaFacebook, FaWhatsapp, FaInstagram } from "react-icons/fa";
 
 function Navbar() {
   const location = useLocation();
-  const isLoginPage = location.pathname === "/login";
 
   return (
     <nav
@@ -25,74 +24,47 @@ function Navbar() {
           alignItems: "center",
         }}
       >
+        {/* 🔗 Logo que devuelve al inicio */}
+        <Link
+          to="/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            textDecoration: "none",
+          }}
+        >
+          <img
+            src="Logo.png"
+            alt="GreenBull Market"
+            style={{
+              height: "70px",
+              width: "70px",
+              marginRight: "10px",
+              borderRadius: "10%",
+              objectFit: "cover",
+              cursor: "pointer",
+              transition: "0.3s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          />
+          <span
+            style={{
+              fontSize: "22px",
+              fontWeight: "bold",
+              color: "white",
+              letterSpacing: "0.5px",
+              cursor: "pointer",
+              transition: "0.3s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
+          >
+            GreenBullMarket
+          </span>
+        </Link>
 
-        <div style={{ display: "flex", alignItems: "center" }}>
-          {isLoginPage ? (
-            <Link
-              to="/"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none",
-              }}
-            >
-              <img
-                src="Logo.jpg"
-                alt="GreenBull Market"
-                style={{
-                  height: "70px",
-                  width: "70px",
-                  marginRight: "10px",
-                  borderRadius: "10%",
-                  objectFit: "cover",
-                  cursor: "pointer",
-                  transition: "0.3s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-              />
-              <span
-                style={{
-                  fontSize: "22px",
-                  fontWeight: "bold",
-                  color: "white",
-                  letterSpacing: "0.5px",
-                  cursor: "pointer",
-                  transition: "0.3s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
-              >
-                GreenBullMarket
-              </span>
-            </Link>
-          ) : (
-            <>
-              <img
-                src="Logo.jpg"
-                alt="GreenBull Market"
-                style={{
-                  height: "70px",
-                  width: "70px",
-                  marginRight: "10px",
-                  borderRadius: "10%",
-                  objectFit: "cover",
-                }}
-              />
-              <span
-                style={{
-                  fontSize: "22px",
-                  fontWeight: "bold",
-                  color: "white",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                GreenBullMarket
-              </span>
-            </>
-          )}
-        </div>
-
+        {/* 🔍 Barra de búsqueda */}
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <form style={{ flex: 1, maxWidth: "500px" }}>
             <div className="input-field" style={{ margin: 0 }}>
@@ -115,6 +87,7 @@ function Navbar() {
           </form>
         </div>
 
+        {/* 🔗 Íconos sociales y botones */}
         <div
           style={{
             display: "flex",
