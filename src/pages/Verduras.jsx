@@ -51,7 +51,7 @@ function Verduras() {
                   <div
                     className="card-image"
                     style={{
-                      backgroundColor: "#c8e6c9", 
+                      backgroundColor: "#e6c8c8ff", 
                       height: "200px",
                       overflow: "hidden",
                       display: "flex",
@@ -75,7 +75,7 @@ function Verduras() {
                   <div
                     className="card-content"
                     style={{
-                      backgroundColor: "#fff176", 
+                      backgroundColor: "#ffffff", 
                       borderRadius: "0 0 10px 10px",
                     }}
                   >
@@ -84,8 +84,9 @@ function Verduras() {
                       style={{ fontWeight: "bold", fontSize: "1.2rem" }}
                     >
                       {v.nombre}
-                    </span>
-                    <p className="green-text text-darken-3">
+                    </span >
+                    <p className="green-text text-darken-3" style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+                      
                       Precio: {v.precio}
                     </p>
                   </div>

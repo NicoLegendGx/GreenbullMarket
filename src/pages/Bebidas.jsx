@@ -14,7 +14,7 @@ function Bebidas() {
     { nombre: "Chocolate caliente", precio: "$3.500", img: "Chocolate.jpg" },
     { nombre: "Limonada", precio: "$2.200", img: "Limonada.jpg" },
     { nombre: "Malteada", precio: "$4.000", img: "Malteada.png" },
-    { nombre: "Cerveza", precio: "$4.500", img: "Cerveza.png" },
+    { nombre: "Cactus", precio: "$4.500", img: "cactus.jpg" },
     { nombre: "Energizante", precio: "$5.000", img: "Energizante.jpg" },
     { nombre: "Leche", precio: "$2.000", img: "Leche.jpg" },
     { nombre: "Vino", precio: "$7.000", img: "Vino.jpg" },
@@ -75,7 +75,7 @@ function Bebidas() {
                   <div
                     className="card-content"
                     style={{
-                      backgroundColor: "#fff176",
+                      backgroundColor: "#ffffff",
                       borderRadius: "0 0 10px 10px",
                     }}
                   >
@@ -85,7 +85,7 @@ function Bebidas() {
                     >
                       {b.nombre}
                     </span>
-                    <p className="green-text text-darken-3">
+                    <p className="green-text text-darken-3" style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
                       Precio: {b.precio}
                     </p>
                   </div>

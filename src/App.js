@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "materialize-css/dist/css/materialize.min.css";
-import "materialize-css/dist/js/materialize.min.js";
+import M from "materialize-css/dist/js/materialize.min.js";
 import Navbar from "./components/Navbar";
 import Carrusel from "./components/carrusel";
 import Footer from "./components/Footer";
@@ -16,6 +16,11 @@ import BebidasAlcoholicas from "./pages/BebidasAlcoholicas";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
+  const [ofertaSeleccionada, setOfertaSeleccionada] = useState(null);
+  useEffect(() => {
+    M.AutoInit();
+  }, []);
+
   const categorias = [
     { icon: "local_grocery_store", text: "Frutas", link: "/frutas" },
     { icon: "restaurant", text: "Carnes", link: "/carnes" },
@@ -26,6 +31,26 @@ function App() {
     { icon: "set_meal", text: "Pescados", link: "/pescados" },
     { icon: "liquor", text: "Bebidas Alcohólicas", link: "/bebidas-alcoholicas" },
   ];
+
+
+  const ofertas = [
+    { img: "OfertaAlcohol.jpg", texto: "Whiskys al 25% de descuento en todas las marcas premium." },
+    { img: "CanastaFamilar.jpg", texto: "Canasta familiar con 20 productos de primera necesidad a precio especial." },
+    { img: "OfertaCarneRefri.jpg", texto: "Carnes refrigeradas con 30% de descuento. Calidad garantizada." },
+    { img: "OfertaYogurt.jpg", texto: "Yogures y lácteos a mitad de precio por tiempo limitado. ¡Aprovecha!" },
+    { img: "NCanastaAseo.jpg", texto: "Canastra de aseo con productos de primera necesidad para el hogar." },
+    { img: "NCanastaKitCocina.jpg", texto: "Kits de cocina completos con precio especial." },
+    { img: "NCanastaSupermercado.jpg", texto: "Canasta de supermercado con productos de primera nececidad." },
+    { img: "NOfertaFruta.jpg", texto: "Frutas frescas con hasta 50% de descuento directo en caja." },
+    { img: "NOfertaLimpieza.jpg", texto: "Productos de limpieza al mejor precio, con 50% en oferta." },
+    { img: "NOfertaVerdura.jpg", texto: "Verduras verdes seleccionadas a 30% del precio." },
+    { img: "NOfertaCelular.jpg", texto: "Celulares de última generación al 10% (Segunda unidad)." },
+    { img: "NOfertaCereal.jpg", texto: "Cereales nutritivos en oferta del 15% para toda la familia." },
+  ];
+
+  const agregarAlCarrito = () => {
+    M.toast({ html: "Producto agregado al carrito 🛒", classes: "green darken-2" });
+  };
 
   return (
     <Router>
@@ -42,7 +67,6 @@ function App() {
                   <h4 className="center black-text text-darken-3">
                     <b>Categorías</b>
                   </h4>
-
                   <div className="row">
                     {categorias.map((cat, i) => (
                       <div className="col s12 m6 l3" key={i}>
@@ -56,8 +80,8 @@ function App() {
                               cursor: "pointer",
                             }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = "#66bb6a"; 
-                              e.currentTarget.querySelector("i").style.color = "#ffeb3b"; 
+                              e.currentTarget.style.backgroundColor = "#66bb6a";
+                              e.currentTarget.querySelector("i").style.color = "#ffeb3b";
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.backgroundColor = "#43a047";
@@ -93,10 +117,7 @@ function App() {
                                 backgroundColor: "rgba(255,255,255,0.2)",
                               }}
                             >
-                              <span
-                                className="black-text"
-                                style={{ fontWeight: "bold" }}
-                              >
+                              <span className="black-text" style={{ fontWeight: "bold" }}>
                                 Ver productos
                               </span>
                             </div>
@@ -112,33 +133,20 @@ function App() {
                 <div className="container">
                   <h4 className="green-text text-darken-4">Ofertas Especiales</h4>
                   <div className="row">
-                    {[
-                      { img: "OfertaAlcohol.jpg" },
-                      { img: "CanastaFamilar.jpg" },
-                      { img: "OfertaCarneRefri.jpg" },
-                      { img: "OfertaYogurt.jpg" },
-                      { img: "NCanastaAseo.jpg" },
-                      { img: "NCanastaKitCocina.jpg" },
-                      { img: "NCanastaSupermercado.jpg" },
-                      { img: "NOfertaFruta.jpg" },
-                      { img: "NOfertaLimpieza.jpg" },
-                      { img: "NOfertaVerdura.jpg" },
-                      { img: "NOfertaCelular.jpg" },
-                      { img: "NOfertaCereal.jpg" },
-                    ].map((p, i) => (
+                    {ofertas.map((p, i) => (
                       <div className="col s12 m6 l3" key={i}>
                         <div
-                          className="card z-depth-2 hoverable"
+                          className="card z-depth-2 hoverable modal-trigger"
+                          data-target="modalOferta"
                           style={{
                             borderRadius: "12px",
                             overflow: "hidden",
                             transition: "all 0.3s ease",
+                            cursor: "pointer",
                           }}
+                          onClick={() => setOfertaSeleccionada(p)}
                         >
-                          <div
-                            className="card-image"
-                            style={{ position: "relative", height: "400px" }}
-                          >
+                          <div className="card-image" style={{ position: "relative", height: "400px" }}>
                             <img
                               src={p.img}
                               alt="Oferta"
@@ -172,7 +180,47 @@ function App() {
                 </div>
               </section>
 
-              <section className="section center">
+              <div id="modalOferta" className="modal" style={{ borderRadius: "12px" }}>
+                <div className="modal-content">
+                  {ofertaSeleccionada ? (
+                    <div className="row" style={{ display: "flex", alignItems: "center" }}>
+                      <div className="col s12 m6">
+                        <img
+                          src={ofertaSeleccionada.img}
+                          alt="Oferta"
+                          style={{
+                            width: "100%",
+                            borderRadius: "10px",
+                            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+                          }}
+                        />
+                      </div>
+                      <div className="col s12 m6">
+                        <h5 className="green-text text-darken-3">Detalles de la oferta</h5>
+                        <p style={{ fontSize: "1.2rem" }}>{ofertaSeleccionada.texto}</p>
+
+                        <button
+                          className="btn green darken-2 waves-effect waves-light"
+                          style={{ borderRadius: "8px", marginTop: "15px" }}
+                          onClick={agregarAlCarrito}
+                        >
+                          <i className="material-icons left">add_shopping_cart</i>
+                          Agregar al carrito
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <p>Cargando...</p>
+                  )}
+                </div>
+
+                <div className="modal-footer">
+                  <a href="#!" className="modal-close waves-effect waves-green btn-flat">
+                    Cerrar
+                  </a>
+                </div>
+              </div>
+                            <section className="section center">
                 <div className="container">
                   <h4 className="green-text text-darken-4">
                     Productos Recomendados

@@ -97,7 +97,7 @@ function Navbar() {
           }}
         >
           <Link
-            to="/login"
+            to="https://www.facebook.com/nicolas.tamayo.586390"
             className="tooltipped"
             data-tooltip="Facebook"
             style={{ color: "white", transition: "0.3s", fontSize: "24px" }}
@@ -108,7 +108,7 @@ function Navbar() {
           </Link>
 
           <Link
-            to="/login"
+            to="https://wa.me/+573219810212"
             className="tooltipped"
             data-tooltip="WhatsApp"
             style={{ color: "white", transition: "0.3s", fontSize: "24px" }}
@@ -119,7 +119,7 @@ function Navbar() {
           </Link>
 
           <Link
-            to="/login"
+            to="https://www.instagram.com/nicolast.gx?igsh=MWJiNnh2ZXJna2NydA=="
             className="tooltipped"
             data-tooltip="Instagram"
             style={{ color: "white", transition: "0.3s", fontSize: "24px" }}

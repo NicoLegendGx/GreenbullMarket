@@ -9,21 +9,23 @@ const Footer = () => {
       className="page-footer"
       style={{
         backgroundColor: "#064420",
-        marginTop: "40px",
+        marginTop: "0", // 🔧 Antes era 40px — lo quitamos para eliminar la línea blanca
         color: "white",
       }}
     >
       <div className="container">
-        <div className="row" style={{ marginBottom: 0, display: "flex", flexWrap: "wrap" }}>
-        
-        
+        <div
+          className="row"
+          style={{ marginBottom: 0, display: "flex", flexWrap: "wrap" }}
+        >
           <div className="col s12 m6 l3 center-align">
-            <h5 style={{ color: "#ffcc00", fontWeight: "bold" }}>GreenBullMarket</h5>
+            <h5 style={{ color: "#ffcc00", fontWeight: "bold" }}>
+              GreenBullMarket
+            </h5>
             <p style={{ color: "white" }}>
               Tu mercado de confianza al mejor precio.
             </p>
 
-            
             <div style={{ marginTop: "15px" }}>
               {[
                 { icon: <FaFacebookF />, link: "#!" },
@@ -39,8 +41,12 @@ const Footer = () => {
                     fontSize: "20px",
                     transition: "0.3s",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "#ffcc00")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "white")
+                  }
                 >
                   {social.icon}
                 </a>
@@ -48,20 +54,22 @@ const Footer = () => {
             </div>
           </div>
 
-    
           <div className="col s12 m6 l2">
-            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>Contáctanos</h6>
+            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
+              Contáctanos
+            </h6>
             <p>📞 3212760086</p>
             <p>📞 3219810212</p>
             <p>📞 3187135656</p>
             <p>📞 3154453060</p>
-            <p>📧tonto@gmail.com</p>
+            <p>📧 tonto@gmail.com</p>
             <p>📍 Neiva, Huila</p>
           </div>
 
-          
           <div className="col s12 m6 l3">
-            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>Links de Interés</h6>
+            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
+              Links de Interés
+            </h6>
             {[
               "Sobre nosotros",
               "Trabaja con nosotros",
@@ -78,8 +86,12 @@ const Footer = () => {
                   transition: "0.3s",
                   marginBottom: "4px",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "#ffcc00")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "white")
+                }
               >
                 {link}
               </a>
@@ -87,7 +99,9 @@ const Footer = () => {
           </div>
 
           <div className="col s12 m6 l2">
-            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>Importante</h6>
+            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
+              Importante
+            </h6>
             {[
               "Política de cambios",
               "Términos y condiciones",
@@ -104,8 +118,12 @@ const Footer = () => {
                   transition: "0.3s",
                   marginBottom: "4px",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "#ffcc00")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "white")
+                }
               >
                 {link}
               </a>
@@ -132,13 +150,12 @@ const Footer = () => {
         </div>
       </div>
 
-
       <div
         className="footer-copy center-align"
         style={{
           backgroundColor: "#043815",
           padding: "10px 0",
-          marginTop: "20px",
+          marginTop: "0", // 🔧 Quitamos el margen superior del footer-copy
         }}
       >
         © 2025 <b>GreenBullMarket</b>

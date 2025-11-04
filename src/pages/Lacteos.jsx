@@ -75,7 +75,7 @@ function Lacteos() {
                   <div
                     className="card-content"
                     style={{
-                      backgroundColor: "#fff176",
+                      backgroundColor: "#ffffff",
                       borderRadius: "0 0 10px 10px",
                     }}
                   >
@@ -85,7 +85,7 @@ function Lacteos() {
                     >
                       {p.nombre}
                     </span>
-                    <p className="green-text text-darken-3">
+                    <p className="green-text text-darken-3"style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
                       Precio: {p.precio}
                     </p>
                   </div>
