@@ -4,7 +4,7 @@ import "materialize-css/dist/js/materialize.min.js";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function BebidasAlcoholicas() {
+function BebidasAlcoholicas({ agregarAlCarrito }) {
   const productos = [
     { nombre: "Cerveza", precio: "$3.000", img: "Cerveza.png" },
     { nombre: "Vino Tinto Reserva", precio: "$25.000", img: "VinoTinto.jpg" },
@@ -104,6 +104,9 @@ function BebidasAlcoholicas() {
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.backgroundColor = "#388e3c")
                       }
+                      onClick={() => { 
+                        if (agregarAlCarrito) agregarAlCarrito();
+                      }}
                     >
                       <i className="material-icons left">add_shopping_cart</i>
                       Al carrito

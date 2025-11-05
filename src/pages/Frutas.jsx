@@ -4,7 +4,7 @@ import "materialize-css/dist/js/materialize.min.js";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function Frutas() {
+function Frutas({agregarAlCarrito}) {
   const frutas = [
     { nombre: "Manzana", precio: "$2.000/kg", img: "FrutaManzana.jpg" },
     { nombre: "Banano", precio: "$1.500/kg", img: "FrutaBanano.jpg" },
@@ -104,6 +104,9 @@ function Frutas() {
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.backgroundColor = "#388e3c")
                       }
+                      onClick={() => { 
+                        if (agregarAlCarrito) agregarAlCarrito();
+                      }}
                     >
                       <i className="material-icons left">add_shopping_cart</i>
                       Al carrito

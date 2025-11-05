@@ -17,6 +17,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [ofertaSeleccionada, setOfertaSeleccionada] = useState(null);
+
+  const [carritoCount, setCarritoCount] = useState(0);
+
   useEffect(() => {
     M.AutoInit();
   }, []);
@@ -31,7 +34,6 @@ function App() {
     { icon: "set_meal", text: "Pescados", link: "/pescados" },
     { icon: "liquor", text: "Bebidas Alcohólicas", link: "/bebidas-alcoholicas" },
   ];
-
 
   const ofertas = [
     { img: "OfertaAlcohol.jpg", texto: "Whiskys al 25% de descuento en todas las marcas premium." },
@@ -48,19 +50,24 @@ function App() {
     { img: "NOfertaCereal.jpg", texto: "Cereales nutritivos en oferta del 15% para toda la familia." },
   ];
 
+
   const agregarAlCarrito = () => {
+    setCarritoCount((prev) => prev + 1); 
     M.toast({ html: "Producto agregado al carrito 🛒", classes: "green darken-2" });
   };
 
   return (
     <Router>
-      <Navbar />
+
+      <Navbar carritoCount={carritoCount} />
+
       <Routes>
         <Route
           path="/"
           element={
             <>
               <Carrusel />
+
 
               <section className="section lime lighten-5">
                 <div className="container">
@@ -129,6 +136,7 @@ function App() {
                 </div>
               </section>
 
+
               <section className="section beige lighten-4 center">
                 <div className="container">
                   <h4 className="green-text text-darken-4">Ofertas Especiales</h4>
@@ -180,6 +188,7 @@ function App() {
                 </div>
               </section>
 
+
               <div id="modalOferta" className="modal" style={{ borderRadius: "12px" }}>
                 <div className="modal-content">
                   {ofertaSeleccionada ? (
@@ -198,6 +207,7 @@ function App() {
                       <div className="col s12 m6">
                         <h5 className="green-text text-darken-3">Detalles de la oferta</h5>
                         <p style={{ fontSize: "1.2rem" }}>{ofertaSeleccionada.texto}</p>
+
 
                         <button
                           className="btn green darken-2 waves-effect waves-light"
@@ -220,11 +230,11 @@ function App() {
                   </a>
                 </div>
               </div>
-                            <section className="section center">
+
+
+              <section className="section center">
                 <div className="container">
-                  <h4 className="green-text text-darken-4">
-                    Productos Recomendados
-                  </h4>
+                  <h4 className="green-text text-darken-4">Productos Recomendados</h4>
                   <h6 className="grey-text text-darken-1">
                     Nuestros productos más comprados, ¡por si te interesan!
                   </h6>
@@ -236,11 +246,11 @@ function App() {
                       { nombre: "Arroz Wahaj X 5kg", precio: "$2.800", img: "Arroz.png" },
                       { nombre: "Carne Molida X kg", precio: "$22.000", img: "Carne Molida.png" },
                       { nombre: "Canasta De Huevos", precio: "$12.500", img: "Canasta de Huevos.jpg" },
-                      { nombre: "Pan Bimbo ", precio: "$2.000", img: "Pan.png" },
+                      { nombre: "Pan Bimbo", precio: "$2.000", img: "Pan.png" },
                       { nombre: "Queso Asadero x kg", precio: "$7.200", img: "Queso.png" },
                       { nombre: "Cerveza Heineken", precio: "$2.800", img: "Cerveza.png" },
                       { nombre: "Papel Higienico", precio: "$6.800", img: "papel higienico.jpg" },
-                      { nombre: "Salsa De Tomate Fruco X 400gr ", precio: "$8.800", img: "salsa de tomate fruco.jpg" },
+                      { nombre: "Salsa De Tomate Fruco X 400gr", precio: "$8.800", img: "salsa de tomate fruco.jpg" },
                       { nombre: "Aceite La Favorita X 3lt", precio: "$4.500", img: "Aceite.jpg" },
                       { nombre: "Blanqueador Full Fresh X 3785ml", precio: "$4.500", img: "Blanqueador.jpg" },
                     ].map((p, i) => (
@@ -268,8 +278,11 @@ function App() {
                             <p className="green-text text-darken-2">{p.precio}</p>
                           </div>
                           <div className="card-action">
+
+
                             <a
                               href="#!"
+                              onClick={agregarAlCarrito}
                               className="btn-small green darken-2 waves-effect waves-light"
                               style={{
                                 borderRadius: "8px",
@@ -293,15 +306,15 @@ function App() {
           }
         />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/frutas" element={<Frutas />} />
-        <Route path="/carnes" element={<Carnes />} />
-        <Route path="/bebidas" element={<Bebidas />} />
-        <Route path="/lacteos" element={<Lacteos />} />
-        <Route path="/verduras" element={<Verduras />} />
-        <Route path="/panaderia" element={<Panaderia />} />
-        <Route path="/pescados" element={<Pescados />} />
-        <Route path="/bebidas-alcoholicas" element={<BebidasAlcoholicas />} />
+        <Route path="/login" element={<Login agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/frutas" element={<Frutas agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/carnes" element={<Carnes agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/bebidas" element={<Bebidas agregarAlCarrito={agregarAlCarrito} />} />
+        <Route path="/lacteos" element={<Lacteos agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/verduras" element={<Verduras agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/panaderia" element={<Panaderia agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/pescados" element={<Pescados agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/bebidas-alcoholicas" element={<BebidasAlcoholicas agregarAlCarrito={agregarAlCarrito}/>} />
       </Routes>
     </Router>
   );

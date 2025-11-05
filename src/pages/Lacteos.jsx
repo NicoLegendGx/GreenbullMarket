@@ -4,7 +4,7 @@ import "materialize-css/dist/js/materialize.min.js";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function Lacteos() {
+function Lacteos({agregarAlCarrito}) {
   const lacteos = [
     { nombre: "Leche Entera", precio: "$3.200", img: "Leche Alqueria.jpg" },
     { nombre: "Yogurt Natural", precio: "$4.000", img: "Yogurt.png" },
@@ -104,6 +104,9 @@ function Lacteos() {
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.backgroundColor = "#388e3c")
                       }
+                      onClick={() => { 
+                        if (agregarAlCarrito) agregarAlCarrito();
+                      }}
                     >
                       <i className="material-icons left">add_shopping_cart</i>
                       Al carrito

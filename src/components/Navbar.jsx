@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import "materialize-css/dist/css/materialize.min.css";
 import { FaFacebook, FaWhatsapp, FaInstagram } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({ carritoCount }) { 
   const location = useLocation();
 
   return (
@@ -24,7 +24,7 @@ function Navbar() {
           alignItems: "center",
         }}
       >
-        {/* 🔗 Logo que devuelve al inicio */}
+        
         <Link
           to="/"
           style={{
@@ -64,7 +64,6 @@ function Navbar() {
           </span>
         </Link>
 
-        {/* 🔍 Barra de búsqueda */}
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <form style={{ flex: 1, maxWidth: "500px" }}>
             <div className="input-field" style={{ margin: 0 }}>
@@ -87,13 +86,13 @@ function Navbar() {
           </form>
         </div>
 
-        {/* 🔗 Íconos sociales y botones */}
         <div
           style={{
             display: "flex",
             justifyContent: "flex-end",
             alignItems: "center",
             gap: "15px",
+            position: "relative",
           }}
         >
           <Link
@@ -146,13 +145,35 @@ function Navbar() {
             href="#carrito"
             className="tooltipped"
             data-tooltip="Mi carrito"
-            style={{ color: "white", transition: "0.3s" }}
+            style={{ color: "white", transition: "0.3s", position: "relative" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
           >
             <i className="material-icons" style={{ fontSize: "28px" }}>
               shopping_cart
             </i>
+
+            {carritoCount > 0 && (
+              <span
+                style={{
+                  position: "absolute",
+                  top: "-5px",
+                  right: "-10px",
+                  backgroundColor: "#ffcc00",
+                  color: "#005921",
+                  borderRadius: "50%",
+                  width: "18px",
+                  height: "18px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "12px",
+                  fontWeight: "bold",
+                }}
+              >
+                {carritoCount}
+              </span>
+            )}
           </a>
         </div>
       </div>

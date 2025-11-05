@@ -4,7 +4,7 @@ import "materialize-css/dist/js/materialize.min.js";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function Bebidas() {
+function Bebidas({ agregarAlCarrito }) { 
   const bebidas = [
     { nombre: "Gaseosa", precio: "$3.000", img: "Gaseosa.jpg" },
     { nombre: "Agua", precio: "$1.500", img: "Agua.png" },
@@ -90,7 +90,6 @@ function Bebidas() {
                     </p>
                   </div>
 
-
                   <div className="card-action center">
                     <a
                       href="#!"
@@ -105,6 +104,9 @@ function Bebidas() {
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.backgroundColor = "#388e3c")
                       }
+                      onClick={() => { 
+                        if (agregarAlCarrito) agregarAlCarrito();
+                      }}
                     >
                       <i className="material-icons left">add_shopping_cart</i>
                       Al carrito
