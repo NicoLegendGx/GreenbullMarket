@@ -37,12 +37,12 @@ function App() {
 
   const ofertas = [
     { img: "OfertaAlcohol.jpg", texto: "Whiskys al 25% de descuento en todas las marcas premium." },
-    { img: "CanastaFamilar.jpg", texto: "Canasta familiar con 20 productos de primera necesidad a precio especial." },
+    { img: "CanastaFamiliarV.jpg",texto: "Canasta familiar con 20 productos de primera necesidad a precio especial." },
     { img: "OfertaCarneRefri.jpg", texto: "Carnes refrigeradas con 30% de descuento. Calidad garantizada." },
     { img: "OfertaYogurt.jpg", texto: "Yogures y lácteos a mitad de precio por tiempo limitado. ¡Aprovecha!" },
-    { img: "NCanastaAseo.jpg", texto: "Canastra de aseo con productos de primera necesidad para el hogar." },
-    { img: "NCanastaKitCocina.jpg", texto: "Kits de cocina completos con precio especial." },
-    { img: "NCanastaSupermercado.jpg", texto: "Canasta de supermercado con productos de primera nececidad." },
+    { img: "NCanastaAseoV.jpg", texto: "Canastra de aseo con productos de primera necesidad para el hogar." },
+    { img: "NCanastaKitCocinaV.jpg", texto: "Kits de cocina completos con precio especial." },
+    { img: "NCanastaSupermercadoV.jpg", texto: "Canasta de supermercado con productos de primera nececidad." },
     { img: "NOfertaFruta.jpg", texto: "Frutas frescas con hasta 50% de descuento directo en caja." },
     { img: "NOfertaLimpieza.jpg", texto: "Productos de limpieza al mejor precio, con 50% en oferta." },
     { img: "NOfertaVerdura.jpg", texto: "Verduras verdes seleccionadas a 30% del precio." },
@@ -189,47 +189,109 @@ function App() {
               </section>
 
 
-              <div id="modalOferta" className="modal" style={{ borderRadius: "12px" }}>
-                <div className="modal-content">
-                  {ofertaSeleccionada ? (
-                    <div className="row" style={{ display: "flex", alignItems: "center" }}>
-                      <div className="col s12 m6">
-                        <img
-                          src={ofertaSeleccionada.img}
-                          alt="Oferta"
-                          style={{
-                            width: "100%",
-                            borderRadius: "10px",
-                            boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-                          }}
-                        />
-                      </div>
-                      <div className="col s12 m6">
-                        <h5 className="green-text text-darken-3">Detalles de la oferta</h5>
-                        <p style={{ fontSize: "1.2rem" }}>{ofertaSeleccionada.texto}</p>
+<div
+  id="modalOferta"
+  className="modal"
+  style={{
+    borderRadius: "12px",
+    width: "auto",
+    maxWidth: "900px",
+    overflow: "hidden",
+    padding: 0,
+  }}
+>
+  {ofertaSeleccionada ? (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexWrap: "nowrap",
+        height: "auto",
+      }}
+    >
+      {/* 🖼 Imagen a la izquierda */}
+      <div
+        style={{
+          flex: "1 1 50%",
+          textAlign: "center",
+          backgroundColor: "#fafafa",
+        }}
+      >
+        <img
+          src={ofertaSeleccionada.img}
+          alt="Oferta"
+          style={{
+            width: "100%",
+            height: "100%",
+            maxHeight: "400px",
+            objectFit: "cover",
+            borderRadius: "12px 0 0 12px",
+            display: "block",
+          }}
+        />
+      </div>
+
+      {/* 📝 Texto y botón a la derecha */}
+      <div
+        style={{
+          flex: "1 1 50%",
+          padding: "30px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
+        <h4 className="green-text text-darken-3" style={{ margin: 0 }}>
+          Detalles de la oferta
+        </h4>
+        <p style={{ fontSize: "1.2rem", lineHeight: "1.6", margin: 0 }}>
+          {ofertaSeleccionada.texto}
+        </p>
+
+<button
+  className="btn green darken-2 waves-effect waves-light"
+  style={{
+    borderRadius: "10px",
+    padding: "12px 30px",
+    fontSize: "1rem",
+    width: "fit-content",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+  }}
+  onClick={agregarAlCarrito}
+>
+  <i className="material-icons" style={{ fontSize: "18px" }}>
+    add_shopping_cart
+  </i>
+  AGREGAR AL CARRITO
+</button>
 
 
-                        <button
-                          className="btn green darken-2 waves-effect waves-light"
-                          style={{ borderRadius: "8px", marginTop: "15px" }}
-                          onClick={agregarAlCarrito}
-                        >
-                          <i className="material-icons left">add_shopping_cart</i>
-                          Agregar al carrito
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <p>Cargando...</p>
-                  )}
-                </div>
+        {/* ❌ Botón de cerrar dentro de la parte derecha */}
+        <a
+          href="#!"
+          className="modal-close waves-effect waves-green btn-flat"
+          style={{
+            alignSelf: "flex-end",
+            marginTop: "10px",
+            fontWeight: "bold",
+          }}
+        >
+          Cerrar
+        </a>
+      </div>
+    </div>
+  ) : (
+    <div className="modal-content">
+      <p>Cargando...</p>
+    </div>
+  )}
+</div>
 
-                <div className="modal-footer">
-                  <a href="#!" className="modal-close waves-effect waves-green btn-flat">
-                    Cerrar
-                  </a>
-                </div>
-              </div>
 
 
               <section className="section center">

@@ -1,24 +1,157 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "materialize-css/dist/css/materialize.min.css";
-import "materialize-css/dist/js/materialize.min.js";
+import M from "materialize-css";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function Bebidas({ agregarAlCarrito }) { 
+function Bebidas({ agregarAlCarrito }) {
+  // Categorías principales
   const bebidas = [
-    { nombre: "Gaseosa", precio: "$3.000", img: "Gaseosa.jpg" },
-    { nombre: "Agua", precio: "$1.500", img: "Agua.png" },
-    { nombre: "Jugo natural", precio: "$2.800", img: "Jugo.jpg" },
-    { nombre: "Té helado", precio: "$2.500", img: "Te.jpg" },
-    { nombre: "Café", precio: "$2.000", img: "Cafe.jpg" },
-    { nombre: "Chocolate caliente", precio: "$3.500", img: "Chocolate.jpg" },
-    { nombre: "Limonada", precio: "$2.200", img: "Limonada.jpg" },
-    { nombre: "Malteada", precio: "$4.000", img: "Malteada.png" },
-    { nombre: "Cactus", precio: "$4.500", img: "cactus.jpg" },
-    { nombre: "Energizante", precio: "$5.000", img: "Energizante.jpg" },
-    { nombre: "Leche", precio: "$2.000", img: "Leche.jpg" },
-    { nombre: "Vino", precio: "$7.000", img: "Vino.jpg" },
+    {
+      nombre: "Gaseosa",
+      img: "Gaseosa.jpg",
+      productos: [
+        { nombre: "Coca-Cola", precio: 3000 },
+        { nombre: "Sprite", precio: 3000 },
+        { nombre: "Pepsi", precio: 3000 },
+      ],
+    },
+    {
+      nombre: "Agua",
+      img: "Agua.png",
+      productos: [
+        { nombre: "Agua sin gas", precio: 1500 },
+        { nombre: "Agua con gas", precio: 1600 },
+      ],
+    },
+    {
+      nombre: "Jugo natural",
+      img: "Jugo.jpg",
+      productos: [
+        { nombre: "Jugo de naranja", precio: 2800 },
+        { nombre: "Jugo de mango", precio: 2800 },
+        { nombre: "Jugo de fresa", precio: 2800 },
+      ],
+    },
+    {
+      nombre: "Té helado",
+      img: "Te.jpg",
+      productos: [
+        { nombre: "Té limón", precio: 2500 },
+        { nombre: "Té durazno", precio: 2500 },
+      ],
+    },
+    {
+      nombre: "Café",
+      img: "Cafe.jpg",
+      productos: [
+        { nombre: "Café americano", precio: 2000 },
+        { nombre: "Café con leche", precio: 2200 },
+        { nombre: "Capuchino", precio: 2500 },
+      ],
+    },
+    {
+      nombre: "Chocolate caliente",
+      img: "Chocolate.jpg",
+      productos: [
+        { nombre: "Chocolate con leche", precio: 3500 },
+        { nombre: "Chocolate oscuro", precio: 3600 },
+      ],
+    },
+    {
+      nombre: "Limonada",
+      img: "Limonada.jpg",
+      productos: [
+        { nombre: "Limonada natural", precio: 2200 },
+        { nombre: "Limonada de coco", precio: 2500 },
+      ],
+    },
+    {
+      nombre: "Malteada",
+      img: "Malteada.png",
+      productos: [
+        { nombre: "Malteada de vainilla", precio: 4000 },
+        { nombre: "Malteada de chocolate", precio: 4200 },
+        { nombre: "Malteada de fresa", precio: 4000 },
+      ],
+    },
+    {
+      nombre: "Cactus",
+      img: "cactus.jpg",
+      productos: [
+        { nombre: "Cactus maracuyá", precio: 4500 },
+        { nombre: "Cactus frutos rojos", precio: 4500 },
+      ],
+    },
+    {
+      nombre: "Energizante",
+      img: "Energizante.jpg",
+      productos: [
+        { nombre: "Red Bull", precio: 5000 },
+        { nombre: "Volt", precio: 4500 },
+        { nombre: "Monster", precio: 5200 },
+      ],
+    },
+    {
+      nombre: "Leche",
+      img: "Leche.jpg",
+      productos: [
+        { nombre: "Leche entera", precio: 2000 },
+        { nombre: "Leche deslactosada", precio: 2100 },
+      ],
+    },
+    {
+      nombre: "Vino",
+      img: "Vino.jpg",
+      productos: [
+        { nombre: "Vino tinto", precio: 7000 },
+        { nombre: "Vino blanco", precio: 7200 },
+      ],
+    },
   ];
+
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
+  const [cantidades, setCantidades] = useState({});
+
+  useEffect(() => {
+    const elems = document.querySelectorAll(".modal");
+    M.Modal.init(elems);
+  }, []);
+
+  const abrirModal = (bebida) => {
+    setCategoriaSeleccionada(bebida);
+    const inicial = {};
+    bebida.productos.forEach((p) => (inicial[p.nombre] = 0));
+    setCantidades(inicial);
+
+    const modal = M.Modal.getInstance(document.getElementById("modalBebida"));
+    modal.open();
+  };
+
+  const incrementar = (nombre) => {
+    setCantidades({ ...cantidades, [nombre]: cantidades[nombre] + 1 });
+  };
+
+  const decrementar = (nombre) => {
+    if (cantidades[nombre] > 0) {
+      setCantidades({ ...cantidades, [nombre]: cantidades[nombre] - 1 });
+    }
+  };
+
+  const confirmarCompra = () => {
+    if (agregarAlCarrito && categoriaSeleccionada) {
+      Object.entries(cantidades).forEach(([nombre, cant]) => {
+        if (cant > 0) {
+          const producto = categoriaSeleccionada.productos.find(
+            (p) => p.nombre === nombre
+          );
+          agregarAlCarrito(producto, cant);
+        }
+      });
+    }
+    const modal = M.Modal.getInstance(document.getElementById("modalBebida"));
+    modal.close();
+  };
 
   return (
     <>
@@ -85,9 +218,6 @@ function Bebidas({ agregarAlCarrito }) {
                     >
                       {b.nombre}
                     </span>
-                    <p className="green-text text-darken-3" style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-                      Precio: {b.precio}
-                    </p>
                   </div>
 
                   <div className="card-action center">
@@ -104,9 +234,7 @@ function Bebidas({ agregarAlCarrito }) {
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.backgroundColor = "#388e3c")
                       }
-                      onClick={() => { 
-                        if (agregarAlCarrito) agregarAlCarrito();
-                      }}
+                      onClick={() => abrirModal(b)}
                     >
                       <i className="material-icons left">add_shopping_cart</i>
                       Al carrito
@@ -120,12 +248,131 @@ function Bebidas({ agregarAlCarrito }) {
           <Link
             to="/"
             className="btn yellow darken-2 black-text waves-effect waves-light"
-            style={{ borderRadius: "10px", marginTop: "20px" }}
+            style={{
+              borderRadius: "10px",
+              marginTop: "20px",
+              paddingBottom: "10px",
+            }}
           >
             Volver a Categorías
           </Link>
+          <div style={{ paddingBottom: "40px" }}></div>
         </div>
       </section>
+
+      {/* MODAL */}
+      <div id="modalBebida" className="modal" style={{ borderRadius: "12px" }}>
+        {categoriaSeleccionada && (
+          <div className="modal-content">
+            <h5 className="green-text text-darken-3 center-align">
+              {categoriaSeleccionada.nombre}
+            </h5>
+
+            <img
+              src={categoriaSeleccionada.img}
+              alt={categoriaSeleccionada.nombre}
+              style={{
+                width: "100%",
+                maxWidth: "350px",
+                borderRadius: "12px",
+                display: "block",
+                margin: "0 auto 20px auto",
+              }}
+            />
+
+            {categoriaSeleccionada.productos.map((p, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: "15px",
+                  flexWrap: "wrap",
+                }}
+              >
+                <div style={{ flex: 1 }}>
+                  <p
+                    style={{
+                      fontSize: "1.1rem",
+                      fontWeight: "bold",
+                      margin: 0,
+                    }}
+                  >
+                    {p.nombre}
+                  </p>
+                  <p
+                    className="green-text"
+                    style={{ margin: 0, fontWeight: "bold" }}
+                  >
+                    ${p.precio.toLocaleString()}
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <button
+                    className="btn red darken-1"
+                    onClick={() => decrementar(p.nombre)}
+                    style={{
+                      borderRadius: "6px",
+                      width: "40px",
+                      height: "40px",
+                      minWidth: "40px",
+                    }}
+                  >
+                    <i className="material-icons">remove</i>
+                  </button>
+
+                  <span
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: "bold",
+                      minWidth: "40px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {cantidades[p.nombre] || 0}
+                  </span>
+
+                  <button
+                    className="btn green darken-2"
+                    onClick={() => incrementar(p.nombre)}
+                    style={{
+                      borderRadius: "6px",
+                      width: "40px",
+                      height: "40px",
+                      minWidth: "40px",
+                    }}
+                  >
+                    <i className="material-icons">add</i>
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            <div className="center-align" style={{ marginTop: "20px" }}>
+              <button
+                className="btn green darken-2 waves-effect waves-light"
+                style={{
+                  borderRadius: "10px",
+                  padding: "10px 30px",
+                  fontSize: "1rem",
+                }}
+                onClick={confirmarCompra}
+              >
+                <i className="material-icons left">add_shopping_cart</i>
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
 
       <Footer />
     </>

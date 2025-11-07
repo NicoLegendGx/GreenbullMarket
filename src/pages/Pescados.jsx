@@ -1,24 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "materialize-css/dist/css/materialize.min.css";
-import "materialize-css/dist/js/materialize.min.js";
+import M from "materialize-css";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
-function Pescados({agregarAlCarrito}) {
-  const productos = [
-    { nombre: "Mojarra Roja", precio: "$15.000", img: "Mojarra.jpg" },
-    { nombre: "Bagre", precio: "$13.000", img: "Bagre.jpg" },
-    { nombre: "Atún Fresco", precio: "$18.000", img: "Atun.jpg" },
-    { nombre: "Trucha", precio: "$16.000", img: "Trucha.jpg" },
-    { nombre: "Salmón", precio: "$22.000", img: "Salmón.jpg" },
-    { nombre: "Corvina", precio: "$17.000", img: "Corvina.jpg" },
-    { nombre: "Róbalo", precio: "$19.000", img: "Robalo.jpg" },
-    { nombre: "Sierra", precio: "$14.000", img: "Sierra.png" },
-    { nombre: "Pargo Rojo", precio: "$20.000", img: "Pargo.jpg" },
-    { nombre: "Camarón", precio: "$25.000", img: "Camaron.png" },
-    { nombre: "Calamares", precio: "$16.500", img: "Calamares.jpg" },
-    { nombre: "Tilapia", precio: "$12.000", img: "Tilapia.jpg" },
+function Pescados({ agregarAlCarrito }) {
+  const pescados = [
+    { nombre: "Mojarra Roja", precio: 15000, img: "Mojarra.jpg" },
+    { nombre: "Bagre", precio: 13000, img: "Bagre.jpg" },
+    { nombre: "Atún Fresco", precio: 18000, img: "Atun.jpg" },
+    { nombre: "Trucha", precio: 16000, img: "Trucha.jpg" },
+    { nombre: "Salmón", precio: 22000, img: "Salmón.jpg" },
+    { nombre: "Corvina", precio: 17000, img: "Corvina.jpg" },
+    { nombre: "Róbalo", precio: 19000, img: "Robalo.jpg" },
+    { nombre: "Sierra", precio: 14000, img: "Sierra.png" },
+    { nombre: "Pargo Rojo", precio: 20000, img: "Pargo.jpg" },
+    { nombre: "Camarón", precio: 25000, img: "Camaron.png" },
+    { nombre: "Calamares", precio: 16500, img: "Calamares.jpg" },
+    { nombre: "Tilapia", precio: 12000, img: "Tilapia.jpg" },
   ];
+
+  const [pescadoSeleccionado, setPescadoSeleccionado] = useState(null);
+  const [cantidad, setCantidad] = useState(1);
+
+  useEffect(() => {
+    const elems = document.querySelectorAll(".modal");
+    M.Modal.init(elems);
+  }, []);
+
+  const abrirModal = (pescado) => {
+    setPescadoSeleccionado(pescado);
+    setCantidad(1);
+    const modal = M.Modal.getInstance(document.getElementById("modalPescado"));
+    modal.open();
+  };
+
+  const incrementar = () => setCantidad(cantidad + 1);
+  const decrementar = () => {
+    if (cantidad > 1) setCantidad(cantidad - 1);
+  };
+
+  const confirmarCompra = () => {
+    if (agregarAlCarrito && pescadoSeleccionado) {
+      agregarAlCarrito(pescadoSeleccionado, cantidad);
+    }
+    const modal = M.Modal.getInstance(document.getElementById("modalPescado"));
+    modal.close();
+  };
 
   return (
     <>
@@ -29,7 +57,7 @@ function Pescados({agregarAlCarrito}) {
           </h4>
 
           <div className="row">
-            {productos.map((p, i) => (
+            {pescados.map((p, i) => (
               <div className="col s12 m6 l3" key={i}>
                 <div
                   className="card hoverable z-depth-2"
@@ -48,11 +76,10 @@ function Pescados({agregarAlCarrito}) {
                       "brightness(1)";
                   }}
                 >
-
                   <div
                     className="card-image"
                     style={{
-                      backgroundColor: "#c8e6c9", 
+                      backgroundColor: "#c8e6c9",
                       height: "200px",
                       overflow: "hidden",
                       display: "flex",
@@ -76,7 +103,7 @@ function Pescados({agregarAlCarrito}) {
                   <div
                     className="card-content"
                     style={{
-                      backgroundColor: "#ffffff", 
+                      backgroundColor: "#ffffff",
                       borderRadius: "0 0 10px 10px",
                     }}
                   >
@@ -86,8 +113,11 @@ function Pescados({agregarAlCarrito}) {
                     >
                       {p.nombre}
                     </span>
-                    <p className="green-text text-darken-3" style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
-                      Precio: {p.precio}
+                    <p
+                      className="green-text text-darken-3"
+                      style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+                    >
+                      Precio: ${p.precio.toLocaleString()}/kg
                     </p>
                   </div>
 
@@ -105,9 +135,7 @@ function Pescados({agregarAlCarrito}) {
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.backgroundColor = "#388e3c")
                       }
-                      onClick={() => { 
-                        if (agregarAlCarrito) agregarAlCarrito();
-                      }}
+                      onClick={() => abrirModal(p)}
                     >
                       <i className="material-icons left">add_shopping_cart</i>
                       Al carrito
@@ -121,12 +149,130 @@ function Pescados({agregarAlCarrito}) {
           <Link
             to="/"
             className="btn yellow darken-2 black-text waves-effect waves-light"
-            style={{ borderRadius: "10px", marginTop: "20px" }}
+            style={{
+              borderRadius: "10px",
+              marginTop: "20px",
+              paddingBottom: "10px",
+            }}
           >
             Volver a Categorías
           </Link>
+          <div style={{ paddingBottom: "40px" }}></div>
         </div>
       </section>
+
+      {/* Modal */}
+      <div id="modalPescado" className="modal" style={{ borderRadius: "12px" }}>
+        {pescadoSeleccionado && (
+          <div className="modal-content">
+            <h5 className="green-text text-darken-3 center-align">
+              {pescadoSeleccionado.nombre}
+            </h5>
+
+            <img
+              src={pescadoSeleccionado.img}
+              alt={pescadoSeleccionado.nombre}
+              style={{
+                width: "100%",
+                maxWidth: "350px",
+                borderRadius: "12px",
+                display: "block",
+                margin: "0 auto 20px auto",
+              }}
+            />
+
+            <p
+              className="center-align"
+              style={{ fontSize: "1.2rem", marginBottom: "20px" }}
+            >
+              Precio por kilo: ${pescadoSeleccionado.precio.toLocaleString()}
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+                gap: "20px",
+              }}
+            >
+              <button
+                className="btn green darken-2 waves-effect waves-light"
+                style={{
+                  borderRadius: "10px",
+                  padding: "12px 30px",
+                  fontSize: "1rem",
+                  width: "fit-content",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                }}
+                onClick={confirmarCompra}
+              >
+                <i className="material-icons" style={{ fontSize: "18px" }}>
+                  add_shopping_cart
+                </i>
+                AGREGAR AL CARRITO
+              </button>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "15px",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <button
+                  className="btn red darken-1"
+                  onClick={decrementar}
+                  style={{
+                    borderRadius: "6px",
+                    width: "40px",
+                    height: "40px",
+                    minWidth: "40px",
+                  }}
+                >
+                  <i className="material-icons">remove</i>
+                </button>
+
+                <span
+                  style={{
+                    fontSize: "1.3rem",
+                    fontWeight: "bold",
+                    minWidth: "70px",
+                    textAlign: "center",
+                  }}
+                >
+                  {cantidad} kg
+                </span>
+
+                <button
+                  className="btn green darken-2"
+                  onClick={incrementar}
+                  style={{
+                    borderRadius: "6px",
+                    width: "40px",
+                    height: "40px",
+                    minWidth: "40px",
+                  }}
+                >
+                  <i className="material-icons">add</i>
+                </button>
+
+                <p style={{ fontSize: "1.2rem", margin: 0 }}>
+                  Total:{" "}
+                  <b className="green-text">
+                    ${(pescadoSeleccionado.precio * cantidad).toLocaleString()}
+                  </b>
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
       <Footer />
     </>
