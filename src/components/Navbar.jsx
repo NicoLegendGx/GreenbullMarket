@@ -2,6 +2,9 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "materialize-css/dist/css/materialize.min.css";
 import { FaFacebook, FaWhatsapp, FaInstagram } from "react-icons/fa";
+import { SiPokemon } from "react-icons/si";
+import { FaRegCircle } from "react-icons/fa";
+
 
 function Navbar({ carritoCount }) { 
   const location = useLocation();
@@ -175,6 +178,19 @@ function Navbar({ carritoCount }) {
               </span>
             )}
           </a>
+
+<Link
+  to="/pokemon"
+  className="tooltipped"
+  data-tooltip="Pokédex"
+  style={{ color: "white", transition: "0.3s", fontSize: "24px" }}
+  onMouseEnter={(e) => (e.currentTarget.style.color = "#ff0000")}
+  onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
+>
+  <SiPokemon />
+</Link>
+
+
         </div>
       </div>
     </nav>

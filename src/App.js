@@ -12,8 +12,10 @@ import Lacteos from "./pages/Lacteos";
 import Verduras from "./pages/Verduras";
 import Panaderia from "./pages/Panaderia";
 import Pescados from "./pages/Pescados";
+import Politicas from "./pages/Politicas";
 import BebidasAlcoholicas from "./pages/BebidasAlcoholicas";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Pokemon from "./pages/Pokemon";
 
 function App() {
   const [ofertaSeleccionada, setOfertaSeleccionada] = useState(null);
@@ -210,7 +212,6 @@ function App() {
         height: "auto",
       }}
     >
-      {/* 🖼 Imagen a la izquierda */}
       <div
         style={{
           flex: "1 1 50%",
@@ -232,7 +233,6 @@ function App() {
         />
       </div>
 
-      {/* 📝 Texto y botón a la derecha */}
       <div
         style={{
           flex: "1 1 50%",
@@ -271,7 +271,6 @@ function App() {
 </button>
 
 
-        {/* ❌ Botón de cerrar dentro de la parte derecha */}
         <a
           href="#!"
           className="modal-close waves-effect waves-green btn-flat"
@@ -377,6 +376,8 @@ function App() {
         <Route path="/panaderia" element={<Panaderia agregarAlCarrito={agregarAlCarrito}/>} />
         <Route path="/pescados" element={<Pescados agregarAlCarrito={agregarAlCarrito}/>} />
         <Route path="/bebidas-alcoholicas" element={<BebidasAlcoholicas agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/politicas" element={<Politicas agregarAlCarrito={agregarAlCarrito}/>} />
+        <Route path="/pokemon" element={<Pokemon agregarAlCarrito={agregarAlCarrito}/>} />
       </Routes>
     </Router>
   );

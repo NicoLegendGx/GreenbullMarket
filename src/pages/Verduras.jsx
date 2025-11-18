@@ -161,7 +161,6 @@ function Verduras({ agregarAlCarrito }) {
         </div>
       </section>
 
-      {/* Modal */}
       <div id="modalVerdura" className="modal" style={{ borderRadius: "12px" }}>
         {verduraSeleccionada && (
           <div className="modal-content">

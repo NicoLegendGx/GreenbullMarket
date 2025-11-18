@@ -161,7 +161,6 @@ function Carnes({ agregarAlCarrito }) {
         </div>
       </section>
 
-      {/* MODAL DE COMPRA */}
       <div id="modalCarne" className="modal" style={{ borderRadius: "12px" }}>
         {carneSeleccionada && (
           <div className="modal-content">
@@ -197,7 +196,6 @@ function Carnes({ agregarAlCarrito }) {
                 gap: "20px",
               }}
             >
-              {/* Botón AGREGAR AL CARRITO */}
               <button
                 className="btn green darken-2 waves-effect waves-light"
                 style={{
@@ -218,7 +216,6 @@ function Carnes({ agregarAlCarrito }) {
                 AGREGAR AL CARRITO
               </button>
 
-              {/* Controles de cantidad y total */}
               <div
                 style={{
                   display: "flex",

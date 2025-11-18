@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 function Bebidas({ agregarAlCarrito }) {
-  // Categorías principales
   const bebidas = [
     {
       nombre: "Gaseosa",
@@ -260,7 +259,6 @@ function Bebidas({ agregarAlCarrito }) {
         </div>
       </section>
 
-      {/* MODAL */}
       <div id="modalBebida" className="modal" style={{ borderRadius: "12px" }}>
         {categoriaSeleccionada && (
           <div className="modal-content">

@@ -161,7 +161,6 @@ function Panaderia({ agregarAlCarrito }) {
         </div>
       </section>
 
-      {/* Modal */}
       <div
         id="modalPanaderia"
         className="modal"

@@ -9,7 +9,7 @@ const Footer = () => {
       className="page-footer"
       style={{
         backgroundColor: "#064420",
-        marginTop: "0", // 🔧 Antes era 40px — lo quitamos para eliminar la línea blanca
+        marginTop: "0",
         color: "white",
       }}
     >
@@ -28,9 +28,9 @@ const Footer = () => {
 
             <div style={{ marginTop: "15px" }}>
               {[
-                { icon: <FaFacebookF />, link: "#!" },
-                { icon: <FaWhatsapp />, link: "#!" },
-                { icon: <FaInstagram />, link: "#!" },
+                { icon: <FaFacebookF />, link: "https://www.facebook.com/nicolas.tamayo.586390" },
+                { icon: <FaWhatsapp />, link: "https://wa.me/+573219810212" },
+                { icon: <FaInstagram />, link: "https://www.instagram.com/nicolast.gx?igsh=MWJiNnh2ZXJna2NydA==" },
               ].map((social, i) => (
                 <a
                   key={i}
@@ -66,69 +66,63 @@ const Footer = () => {
             <p>📍 Neiva, Huila</p>
           </div>
 
-          <div className="col s12 m6 l3">
-            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
-              Links de Interés
-            </h6>
-            {[
-              "Sobre nosotros",
-              "Trabaja con nosotros",
-              "Preguntas frecuentes",
-              "Noticias y Actividades",
-              "Malparidos",
-            ].map((link, i) => (
-              <a
-                key={i}
-                href="#!"
-                style={{
-                  display: "block",
-                  color: "white",
-                  transition: "0.3s",
-                  marginBottom: "4px",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "#ffcc00")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "white")
-                }
-              >
-                {link}
-              </a>
-            ))}
-          </div>
+<div className="col s12 m6 l3">
+  <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
+    Links de Interés
+  </h6>
+  {[
+    { nombre: "Sobre nosotros", ruta: "/politicas" },
+    { nombre: "Trabaja con nosotros", ruta: "/politicas" },
+    { nombre: "Preguntas frecuentes", ruta: "/politicas" },
+    { nombre: "Noticias y Actividades", ruta: "/politicas" },
+    { nombre: "Malparidos", ruta: "/politicas" }, 
+  ].map((link, i) => (
+    <Link
+      key={i}
+      to={link.ruta}
+      style={{
+        display: "block",
+        color: "white",
+        transition: "0.3s",
+        marginBottom: "4px",
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
+    >
+      {link.nombre}
+    </Link>
+  ))}
+</div>
 
-          <div className="col s12 m6 l2">
-            <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
-              Importante
-            </h6>
-            {[
-              "Política de cambios",
-              "Términos y condiciones",
-              "Responsabilidad corporativa",
-              "Tratamiento de la información",
-              "Politica AntiTravestis",
-            ].map((link, i) => (
-              <a
-                key={i}
-                href="#!"
-                style={{
-                  display: "block",
-                  color: "white",
-                  transition: "0.3s",
-                  marginBottom: "4px",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "#ffcc00")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "white")
-                }
-              >
-                {link}
-              </a>
-            ))}
-          </div>
+
+<div className="col s12 m6 l2">
+  <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
+    Importante
+  </h6>
+  {[
+    { nombre: "Política de cambios", ruta: "/politicas" },
+    { nombre: "Términos y condiciones", ruta: "/politicas" },
+    { nombre: "Responsabilidad corporativa", ruta: "/politicas" },
+    { nombre: "Tratamiento de la información", ruta: "/politicas" },
+    { nombre: "Politica AntiTravestis", ruta: "/politicas" },
+  ].map((link, i) => (
+    <Link
+      key={i}
+      to={link.ruta}
+      style={{
+        display: "block",
+        color: "white",
+        transition: "0.3s",
+        marginBottom: "4px",
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#ffcc00")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "white")}
+    >
+      {link.nombre}
+    </Link>
+  ))}
+</div>
+
 
           <div className="col s12 m12 l2 center-align">
             <h6 style={{ color: "#ffcc00", fontWeight: "bold" }}>
@@ -155,7 +149,7 @@ const Footer = () => {
         style={{
           backgroundColor: "#043815",
           padding: "10px 0",
-          marginTop: "0", // 🔧 Quitamos el margen superior del footer-copy
+          marginTop: "0",
         }}
       >
         © 2025 <b>GreenBullMarket</b>
